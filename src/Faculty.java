@@ -5,8 +5,8 @@ import java.util.*;
 public class Faculty extends User {
 	Account acc;
 	
-	public Faculty(String name) {
-		super(name);
+	public Faculty(String name, String password) {
+		super(name, password);
 		this.acc = new Account();
 	}
 	public void borrow(String book, LocalDate l, Library lib) {
@@ -39,7 +39,8 @@ public class Faculty extends User {
 			}
 		}
 	}
-	public void return_book(Book b) {
+	public void return_book(String book, Library lib) {
+		Book b = lib.get_book(book);
 		int x = this.acc.books.indexOf(b);
 		this.acc.books.remove(b);
 		this.acc.borrow_date.remove(x);

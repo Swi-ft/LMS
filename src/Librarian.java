@@ -3,22 +3,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Librarian extends User {
-	ArrayList<Student> students = new ArrayList<Student>();
-	ArrayList<Faculty> faculty = new ArrayList<Faculty>();
 	private Library lib;
 	
-	public Librarian(String name, Library lib) {
-		super(name);
+	public Librarian(String name, Library lib, String password) {
+		super(name, password);
 		this.lib = lib;
 	}
-	public void add_student(String x) {
-		Student s = new Student(x);
-		students.add(s);
+	public void add_student(String x, String password) {
+		Student s = new Student(x, password);
+		lib.add_student(s);
 		System.out.println("Added Student "+x);
 	}
-	public void add_faculty(String x) {
-		Faculty f = new Faculty(x);
-		faculty.add(f);
+	public void add_librarian() {
+		lib.add_librarian(this);
+		System.out.println("Added Student "+this.name);
+	}
+	public void add_faculty(String x, String password) {
+		Faculty f = new Faculty(x, password);
+		lib.add_faculty(f);
 		System.out.println("Added Faculty "+x);
 	}
 	public void add_book(String title, String Author, int year, String ISBN) {
@@ -27,78 +29,18 @@ public class Librarian extends User {
 		System.out.println("Added "+title);
 	}
 	public void remove_student(String x) {
-		int n = students.size();
-		boolean removed = false;
-		for(int i = 0;i<n;i++) {
-			if(students.get(i).name == x) {
-				students.remove(i);
-				removed = true;
-				break;
-			}
-		}
-		if(removed) {
-			System.out.println("Removed Student "+x);
-		}
-		else {
-			System.out.println("User Doesn't Exist");
-		}
+		lib.remove_student(x);
 	}
 	public void remove_faculty(String x) {
-		int n = faculty.size();
-		boolean removed = false;
-		for(int i = 0;i<n;i++) {
-			if(faculty.get(i).name == x) {
-				faculty.remove(i);
-				removed = true;
-				break;
-			}
-		}
-		if(removed) {
-			System.out.println("Removed Faculty "+x);
-		}
-		else {
-			System.out.println("User Doesn't Exist");
-		}
+		lib.remove_faculty(x);
 	}
 	public void remove_book(String x) {
 		lib.remove_book(x);
 	}
 	public Student get_student(String x) {
-		int n = students.size();
-		boolean removed = false;
-		int loc = -1;
-		for(int i = 0;i<n;i++) {
-			if(students.get(i).name == x) {
-				loc = i;
-				removed = true;
-				break;
-			}
-		}
-		if(removed) {
-			return students.get(loc);
-		}
-		else {
-			System.out.println("User Doesn't Exist");
-			return null;
-		}
+		return lib.get_student(x);
 	}
 	public Faculty get_faculty(String x) {
-		int n = faculty.size();
-		boolean removed = false;
-		int loc = -1;
-		for(int i = 0;i<n;i++) {
-			if(faculty.get(i).name == x) {
-				loc = i;
-				removed = true;
-				break;
-			}
-		}
-		if(removed) {
-			return faculty.get(loc);
-		}
-		else {
-			System.out.println("User Doesn't Exist");
-			return null;
-		}
+		return lib.get_faculty(x);
 	}
 }

@@ -5,8 +5,8 @@ import java.util.Collections;
 public class Student extends User {
 	Account acc;
 	
-	public Student(String name) {
-		super(name);
+	public Student(String name, String password) {
+		super(name, password);
 		this.acc = new Account();
 	}
 	public void borrow(String b, LocalDate l, Library lib) {
@@ -33,7 +33,8 @@ public class Student extends User {
 	public void clear_fine(int pay) {
 		this.acc.fine = this.acc.fine - pay;
 	}
-	public void return_book(Book b, LocalDate l) {
+	public void return_book(String book, LocalDate l, Library lib) {
+		Book b = lib.get_book(book);
 		int x = this.acc.books.indexOf(b);
 		if((int)ChronoUnit.DAYS.between(l, this.acc.borrow_date.get(x)) < -15) {
 			this.acc.fine = this.acc.fine - 10 * ((int)ChronoUnit.DAYS.between(l, this.acc.borrow_date.get(x))) - 150;
