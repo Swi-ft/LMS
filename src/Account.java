@@ -15,7 +15,7 @@ public class Account {
 		this.books.add(b);
 		this.borrow_date.add(LocalDate.now());
 	}
-	public void check_fine(LocalDate l) {
+	public int check_fine(LocalDate l) {
 		if(this.books.size() != 0) {
 			int x = 0;
 			int n = this.books.size();
@@ -24,7 +24,10 @@ public class Account {
 					x = x - 150 - (int)(10 * (ChronoUnit.DAYS.between(l, this.borrow_date.get(i))));
 				}
 			}
-			this.fine = x;
+			return (x + this.fine);
+		}
+		else {
+			return this.fine;
 		}
 	}
 }

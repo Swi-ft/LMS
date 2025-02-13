@@ -9,7 +9,8 @@ public class Faculty extends User {
 		super(name);
 		this.acc = new Account();
 	}
-	public void borrow(Book b, LocalDate l) {
+	public void borrow(String book, LocalDate l, Library lib) {
+		Book b = lib.get_book(book);
 		if(this.acc.books.size() >= 5) {
 			System.out.println("Can't borrrow book (5 books laready borrowed)");
 		}
@@ -31,6 +32,7 @@ public class Faculty extends User {
 				this.acc.books.add(b);
 				this.acc.borrow_date.add(LocalDate.now());
 				b.avail = 0;
+				System.out.println("Book "+b.title+" Taken by "+this.name+"!");
 			}
 			else {
 				System.out.println("Book not Available");
