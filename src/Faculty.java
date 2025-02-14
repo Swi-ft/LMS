@@ -48,9 +48,14 @@ public class Faculty extends User {
 		Book b = lib.get_book(book);
 		if(b!=null) {
 			int x = this.acc.books.indexOf(b);
-			this.acc.books.remove(b);
-			this.acc.borrow_date.remove(x);
-			b.avail = 1;
+			if(x < 0) {
+				System.out.println("Wrong Book Name!");
+			}
+			else {
+				this.acc.books.remove(b);
+				this.acc.borrow_date.remove(x);
+				b.avail = 1;
+			}
 		}
 		else {
 			System.out.println("Wrong Book Name!");

@@ -42,12 +42,18 @@ public class Student extends User {
 		Book b = lib.get_book(book);
 		if(b!=null) {
 			int x = this.acc.books.indexOf(b);
-			if((int)ChronoUnit.DAYS.between(l, this.acc.borrow_date.get(x)) < -15) {
-				this.acc.fine = this.acc.fine - 10 * ((int)ChronoUnit.DAYS.between(l, this.acc.borrow_date.get(x))) - 150;
+			if(x < 0) {
+				System.out.println("Wrong Book Name!");
 			}
-			this.acc.books.remove(b);
-			this.acc.borrow_date.remove(x);
-			System.out.println("Returned "+b.title+" successfully!");
+			else {
+				if((int)ChronoUnit.DAYS.between(l, this.acc.borrow_date.get(x)) < -15) {
+					this.acc.fine = this.acc.fine - 10 * ((int)ChronoUnit.DAYS.between(l, this.acc.borrow_date.get(x))) - 150;
+				}
+				this.acc.books.remove(b);
+				this.acc.borrow_date.remove(x);
+				System.out.println("Returned "+b.title+" successfully!");
+				b.avail = 1;
+			}
 		}
 		else {
 			System.out.println("Wrong Book Name!");
