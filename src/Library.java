@@ -200,5 +200,16 @@ public class Library {
 			System.out.println("User Doesn't Exist");
 		}
 	}
+	public void show_avail_books() {
+		int n = books.size();
+		int count  = 1;
+		for(int i = 0;i<n;i++) {
+			if(books.get(i).avail == 1) {
+				System.out.print(count+". "+books.get(i).title+" ");
+				count++;
+			}
+		}
+		System.out.println();
+	}
 }
 

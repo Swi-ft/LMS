@@ -73,4 +73,16 @@ public class Student extends User {
 	public void no_of_books() {
 		System.out.println(this.acc.books.size());
 	}
+	public void show_books_borrowed() {
+		int n = this.acc.books.size();
+		if(n == 0) {
+			System.out.println("No Books Borrowed");
+		}
+		else {
+			for(int i =0;i<n;i++) {
+				System.out.print((i+1)+". "+this.acc.books.get(i).title+" ");
+			}
+			System.out.println();
+		}
+	}
 }

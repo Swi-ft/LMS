@@ -80,15 +80,18 @@ public class Main {
 	}
 	private static void studentApp(Library lib, Student s) {
 		Scanner S = new Scanner(System.in);
-		System.out.println("What would you like to do (Enter number): 1. Borrow a Book, 2. Return a Book, 3. Check Fines, 4. Clear pending Fines, 5. Log-Out ?");
+		System.out.println("What would you like to do (Enter number): 1. Borrow a Book, 2. Return a Book, 3. Check Fines, 4. Clear pending Fines, 5. Check Books Borrowed, 6. Log-Out ?");
 		int next = S.nextInt();
 		if(next == 1) {
+			lib.show_avail_books();
 			System.out.println("Enter Book name");
 			String book = S.next();
 			s.borrow(book, currentDate, lib);
 			studentApp(lib, s);
 		}
 		else if(next == 2) {
+			System.out.println("Books you borrowed right now :");
+			s.show_books_borrowed();
 			System.out.println("Enter Book name");
 			String book = S.next();
 			s.return_book(book, currentDate, lib);
@@ -104,7 +107,11 @@ public class Main {
 			s.clear_fine(add);
 			studentApp(lib, s);
 		}
-		else if(next == 5){
+		else if(next == 5) {
+			s.show_books_borrowed();
+			studentApp(lib, s);
+		}
+		else if(next == 6){
 			runApp(lib);
 		}
 		else {
@@ -114,21 +121,28 @@ public class Main {
 	}
 	private static void facultyApp(Library lib, Faculty f) {
 		Scanner S = new Scanner(System.in);
-		System.out.println("What would you like to do (Enter number): 1. Borrow a Book, 2. Return a Book, 3. Log-Out ?");
+		System.out.println("What would you like to do (Enter number): 1. Borrow a Book, 2. Return a Book, 3. Check Books Borrowed, 4. Log-Out ?");
 		int next = S.nextInt();
 		if(next == 1) {
+			lib.show_avail_books();
 			System.out.println("Enter Book name");
 			String book = S.next();
 			f.borrow(book, currentDate, lib);
 			facultyApp(lib, f);
 		}
 		else if(next == 2) {
+			System.out.println("Books you borrowed right now :");
+			f.show_books_borrowed();
 			System.out.println("Enter Book name");
 			String book = S.next();
 			f.return_book(book, lib);
 			facultyApp(lib, f);
 		}
-		else if(next == 3){
+		else if(next == 3) {
+			f.show_books_borrowed();
+			facultyApp(lib, f);
+		}
+		else if(next == 4){
 			runApp(lib);
 		}
 		else {
@@ -150,6 +164,7 @@ public class Main {
 			libApp(lib, l);
 		}
 		else if(next == 2) {
+			lib.show_avail_books();
 			System.out.println("Enter Book name");
 			String book = S.next();
 			l.remove_book(book);
