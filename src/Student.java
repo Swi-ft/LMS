@@ -36,7 +36,14 @@ public class Student extends User {
 		}
 	}
 	public void clear_fine(int pay) {
-		this.acc.fine = this.acc.fine - pay;
+		LocalDate l = LocalDate.now();
+		int x = this.acc.check_fine(l);
+		if(pay <= x) {
+			this.acc.fine = this.acc.fine - pay;
+		}
+		else {
+			System.out.println("Payment amount larger than Total fine! Your current fine is "+x);
+		}
 	}
 	public void return_book(String book, LocalDate l, Library lib) {
 		Book b = lib.get_book(book);
